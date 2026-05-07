@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ใบงานที่ 1.1 เศรษฐศาสตร์กับการดำเนินชีวิต</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Sarabun', sans-serif; background: #f5f4fc; min-height: 100vh; padding: 16px; color: #1a1a2e; }
+  .sheet { max-width: 680px; margin: 0 auto; }
+
+  .header-box {
+    background: #534AB7;
+    border-radius: 18px; padding: 20px 24px; margin-bottom: 20px;
+    display: flex; align-items: center; gap: 14px;
+    position: relative; overflow: hidden;
+  }
+  .header-box::before { content:''; position:absolute; right:-20px; top:-20px; width:110px; height:110px; background:rgba(255,255,255,0.08); border-radius:50%; }
+  .header-box::after { content:''; position:absolute; right:50px; bottom:-30px; width:80px; height:80px; background:rgba(255,255,255,0.06); border-radius:50%; }
+  .header-icon { width:54px; height:54px; background:rgba(255,255,255,0.2); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:28px; flex-shrink:0; }
+  .header-text { flex:1; position:relative; }
+  .header-text h1 { font-size:14px; font-weight:400; color:rgba(255,255,255,0.8); margin-bottom:3px; }
+  .header-text h2 { font-size:19px; font-weight:700; color:#fff; }
+  .progress-bar { background:rgba(255,255,255,0.2); border-radius:20px; height:6px; margin-top:10px; }
+  .progress-fill { background:#fff; border-radius:20px; height:6px; width:0%; transition:width 0.4s ease; }
+  .prog-pct { color:rgba(255,255,255,0.9); font-size:13px; text-align:right; flex-shrink:0; }
+  .prog-pct span { font-size:20px; font-weight:700; display:block; }
+
+  .student-card {
+    background: #fff; border: 2px solid #AFA9EC;
+    border-radius: 16px; padding: 18px 20px; margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(83,74,183,0.08);
+  }
+  .student-card-title { font-size:15px; font-weight:700; color:#3C3489; margin-bottom:14px; }
+  .student-fields { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .field-full { grid-column:1 / -1; }
+  .field-group { display:flex; flex-direction:column; gap:5px; }
+  .field-label { font-size:12px; color:#888; font-weight:600; letter-spacing:0.3px; }
+  .field-input {
+    border:none; border-bottom:2px solid #AFA9EC; background:transparent;
+    font-size:15px; color:#1a1a2e; padding:6px 0; outline:none;
+    font-family:'Sarabun',sans-serif; width:100%; transition:border-color 0.2s;
+  }
+  .field-input:focus { border-bottom-color:#534AB7; }
+  .field-input::placeholder { color:#bbb; font-size:14px; }
+
+  .part-header { display:flex; align-items:center; gap:10px; margin:22px 0 14px; }
+  .part-badge { background:#EEEDFE; color:#3C3489; font-size:12px; font-weight:700; padding:5px 14px; border-radius:20px; border:1px solid #AFA9EC; white-space:nowrap; }
+  .part-title { font-size:13px; color:#666; line-height:1.5; }
+
+  .mission-card {
+    background:#fff; border:1px solid #e8e6f8;
+    border-radius:16px; margin-bottom:16px; overflow:hidden;
+    box-shadow:0 2px 10px rgba(83,74,183,0.06);
+  }
+  .mission-header { display:flex; align-items:center; gap:10px; padding:13px 16px; background:#f8f7fe; border-bottom:1px solid #e8e6f8; }
+  .mission-num { width:30px; height:30px; background:#7F77DD; color:#fff; border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; flex-shrink:0; }
+  .mission-q { font-size:14px; color:#1a1a2e; font-weight:600; flex:1; line-height:1.5; }
+  .mission-body { padding:16px; }
+
+  .answer-lines { display:flex; flex-direction:column; gap:10px; }
+  .answer-line {
+    width:100%; border:none; border-bottom:1.5px dashed #ccc;
+    background:transparent; font-size:15px; color:#1a1a2e; padding:6px 0;
+    outline:none; font-family:'Sarabun',sans-serif; transition:border-color 0.2s;
+  }
+  .answer-line:focus { border-bottom-color:#7F77DD; }
+  .answer-line::placeholder { color:#bbb; font-size:13px; }
+
+  .table-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  .table-mission { width:100%; border-collapse:collapse; font-size:13px; min-width:420px; }
+  .table-mission th { background:#EEEDFE; color:#3C3489; padding:10px 10px; text-align:left; font-weight:700; border:1px solid #AFA9EC; }
+  .table-mission td { border:1px solid #e8e6f8; padding:0; vertical-align:top; }
+  .table-cell-label { font-size:12px; color:#888; padding:8px 10px 2px; display:block; font-weight:600; }
+  .table-answer {
+    width:100%; border:none; background:transparent; font-size:13px;
+    padding:4px 10px 10px; outline:none; color:#1a1a2e;
+    font-family:'Sarabun',sans-serif; resize:none; min-height:60px;
+    line-height:1.6;
+  }
+
+  .example-box { background:#f8f7fe; border-radius:12px; padding:14px 16px; margin-top:12px; border:1px solid #e8e6f8; }
+  .example-box-title { font-size:13px; color:#534AB7; font-weight:700; margin-bottom:10px; }
+  .example-row { display:flex; gap:10px; margin-top:10px; align-items:flex-start; }
+  .example-label { font-size:12px; color:#888; min-width:58px; padding-top:6px; font-weight:600; }
+  .example-input {
+    flex:1; border:none; border-bottom:1.5px dashed #ccc; background:transparent;
+    font-size:14px; color:#1a1a2e; padding:4px 0; outline:none;
+    font-family:'Sarabun',sans-serif; transition:border-color 0.2s;
+  }
+  .example-input:focus { border-bottom-color:#7F77DD; }
+
+  .part2-header {
+    background:#1D9E75; border-radius:16px;
+    padding:16px 20px; margin:22px 0 16px;
+    display:flex; align-items:center; gap:12px;
+    box-shadow:0 2px 12px rgba(29,158,117,0.15);
+  }
+  .part2-icon { width:44px; height:44px; background:rgba(255,255,255,0.2); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0; }
+  .part2-text { color:#fff; font-size:13px; line-height:1.6; }
+  .part2-text strong { font-size:15px; font-weight:700; display:block; margin-bottom:2px; }
+
+  .scenario-card { background:#fff; border:1px solid #e8e6f8; border-radius:16px; margin-bottom:16px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,0.04); }
+  .scenario-banner { padding:12px 16px; font-size:14px; color:#1a1a2e; font-weight:600; border-bottom:1px solid #f0f0f0; display:flex; align-items:flex-start; gap:10px; line-height:1.5; }
+  .scenario-num { width:26px; height:26px; border-radius:7px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; margin-top:1px; }
+  .s1{background:#E1F5EE;color:#085041} .s2{background:#EEEDFE;color:#3C3489} .s3{background:#FAECE7;color:#712B13} .s4{background:#FAEEDA;color:#633806}
+
+  .checkbox-group { padding:12px 16px; display:flex; flex-direction:column; gap:12px; }
+  .checkbox-item { display:flex; align-items:center; gap:10px; }
+  .checkbox-item input[type="checkbox"] { width:20px; height:20px; cursor:pointer; flex-shrink:0; accent-color:#7F77DD; }
+  .checkbox-label { font-size:14px; color:#1a1a2e; min-width:130px; }
+  .fill-input {
+    flex:1; border:none; border-bottom:1.5px dashed #ccc; background:transparent;
+    font-size:14px; color:#1a1a2e; padding:2px 0; outline:none;
+    font-family:'Sarabun',sans-serif; min-width:60px; transition:border-color 0.2s;
+  }
+  .fill-input:focus { border-bottom-color:#7F77DD; }
+  .fill-input::placeholder { color:#bbb; font-size:13px; }
+
+  .submit-area { margin-top:24px; text-align:center; padding-bottom:32px; }
+  .btn-row { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+  .submit-btn {
+    background:#534AB7; color:#fff; border:none; border-radius:14px;
+    padding:14px 32px; font-size:16px; cursor:pointer; font-weight:700;
+    font-family:'Sarabun',sans-serif; transition:background 0.2s, transform 0.1s;
+    box-shadow:0 4px 16px rgba(83,74,183,0.25); letter-spacing:0.3px;
+  }
+  .submit-btn:hover { background:#3C3489; }
+  .submit-btn:active { transform:scale(0.97); }
+  .pdf-btn {
+    background:#1D9E75; color:#fff; border:none; border-radius:14px;
+    padding:14px 32px; font-size:16px; cursor:pointer; font-weight:700;
+    font-family:'Sarabun',sans-serif; transition:background 0.2s, transform 0.1s;
+    box-shadow:0 4px 16px rgba(29,158,117,0.25); letter-spacing:0.3px;
+    display:none;
+  }
+  .pdf-btn:hover { background:#0F6E56; }
+  .pdf-btn:active { transform:scale(0.97); }
+  .score-display { display:none; margin-top:20px; background:#EAF3DE; border-radius:16px; padding:20px 24px; border:1px solid #C0DD97; }
+  .score-num { font-size:26px; font-weight:700; color:#27500A; }
+  .score-label { font-size:14px; color:#3B6D11; margin-top:6px; line-height:1.6; }
+  .star-row { font-size:26px; margin:4px 0 8px; }
+  .pdf-hint { font-size:13px; color:#3B6D11; margin-top:10px; line-height:1.6; }
+
+  @media print {
+    body { background:#fff; padding:0; }
+    .submit-area { display:none; }
+    .header-box { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .part2-header { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .mission-num { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .table-mission th { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .scenario-num { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .student-card { border:2px solid #AFA9EC !important; }
+    .answer-line, .table-answer, .example-input, .fill-input { border-bottom:1px solid #999 !important; }
+    .field-input { border-bottom:1.5px solid #AFA9EC !important; }
+  }
+
+  @media (max-width: 480px) {
+    body { padding: 12px; }
+    .header-box { padding: 16px 16px; gap: 10px; }
+    .header-text h2 { font-size: 16px; }
+    .header-icon { width:44px; height:44px; font-size:22px; }
+    .student-fields { grid-template-columns: 1fr; }
+    .field-full { grid-column: 1; }
+    .checkbox-label { min-width: 110px; font-size:13px; }
+    .mission-q { font-size:13px; }
+    .submit-btn { width:100%; padding:14px; }
+  }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="sheet">
+
+  <div class="header-box">
+    <div class="header-icon">📊</div>
+    <div class="header-text">
+      <h1>ใบงานที่ 1.1 · ภารกิจของฉัน</h1>
+      <h2>เศรษฐศาสตร์กับการดำเนินชีวิต</h2>
+      <div class="progress-bar"><div class="progress-fill" id="prog"></div></div>
+    </div>
+    <div class="prog-pct">
+      <span id="prog-pct">0%</span>เสร็จแล้ว
+    </div>
+  </div>
+
+  <!-- ข้อมูลนักเรียน -->
+  <div class="student-card">
+    <div class="student-card-title">🎒 ข้อมูลนักเรียน</div>
+    <div class="student-fields">
+      <div class="field-group field-full">
+        <span class="field-label">ชื่อ-สกุล</span>
+        <input class="field-input trackable" type="text" id="stu-name" placeholder="กรอกชื่อ-นามสกุล">
+      </div>
+      <div class="field-group">
+        <span class="field-label">ชั้น</span>
+        <input class="field-input trackable" type="text" id="stu-class" placeholder="เช่น ม.1/1">
+      </div>
+      <div class="field-group">
+        <span class="field-label">เลขที่</span>
+        <input class="field-input trackable" type="number" id="stu-num" placeholder="เลขที่" min="1">
+      </div>
+    </div>
+  </div>
+
+  <!-- ตอนที่ 1 -->
+  <div class="part-header">
+    <span class="part-badge">📝 ตอนที่ 1</span>
+    <span class="part-title">ให้นักเรียนวิเคราะห์ความสำคัญของวิชาเศรษฐศาสตร์และแนวทางการนำไปใช้ในชีวิตประจำวัน</span>
+  </div>
+
+  <div class="mission-card">
+    <div class="mission-header">
+      <div class="mission-num">1</div>
+      <div class="mission-q">วิชาเศรษฐศาสตร์มีความสำคัญอย่างไร</div>
+    </div>
+    <div class="mission-body">
+      <div class="answer-lines">
+        <input class="answer-line trackable" type="text" placeholder="พิมพ์คำตอบของคุณที่นี่...">
+        <input class="answer-line trackable" type="text" placeholder="...">
+        <input class="answer-line trackable" type="text" placeholder="...">
+      </div>
+    </div>
+  </div>
+
+  <div class="mission-card">
+    <div class="mission-header">
+      <div class="mission-num">2</div>
+      <div class="mission-q">วิชาเศรษฐศาสตร์สามารถนำไปใช้ในระดับต่างๆ ได้อย่างไรบ้าง และมีประโยชน์อย่างไร</div>
+    </div>
+    <div class="mission-body">
+      <div class="table-wrap">
+        <table class="table-mission">
+          <tr>
+            <th>🏠 ผู้บริโภค/ครัวเรือน</th>
+            <th>🏭 ผู้ผลิต/ผู้ประกอบการ</th>
+            <th>🏛️ รัฐบาล</th>
+          </tr>
+          <tr>
+            <td>
+              <span class="table-cell-label">• การนำไปใช้</span>
+              <textarea class="table-answer trackable" rows="3" placeholder="เช่น วางแผนรายรับรายจ่าย..."></textarea>
+              <span class="table-cell-label">• ประโยชน์</span>
+              <textarea class="table-answer trackable" rows="2" placeholder="ประโยชน์ที่ได้รับ..."></textarea>
+            </td>
+            <td>
+              <span class="table-cell-label">• การนำไปใช้</span>
+              <textarea class="table-answer trackable" rows="3" placeholder="เช่น วิเคราะห์ต้นทุน..."></textarea>
+              <span class="table-cell-label">• ประโยชน์</span>
+              <textarea class="table-answer trackable" rows="2" placeholder="ประโยชน์ที่ได้รับ..."></textarea>
+            </td>
+            <td>
+              <span class="table-cell-label">• การนำไปใช้</span>
+              <textarea class="table-answer trackable" rows="3" placeholder="เช่น กำหนดนโยบาย..."></textarea>
+              <span class="table-cell-label">• ประโยชน์</span>
+              <textarea class="table-answer trackable" rows="2" placeholder="ประโยชน์ที่ได้รับ..."></textarea>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission-card">
+    <div class="mission-header">
+      <div class="mission-num">3</div>
+      <div class="mission-q">วิชาเศรษฐศาสตร์มีความสำคัญกับนักเรียนอย่างไรบ้าง</div>
+    </div>
+    <div class="mission-body">
+      <div class="answer-lines">
+        <input class="answer-line trackable" type="text" placeholder="ความสำคัญข้อที่ 1...">
+        <input class="answer-line trackable" type="text" placeholder="ความสำคัญข้อที่ 2...">
+        <input class="answer-line trackable" type="text" placeholder="ความสำคัญข้อที่ 3...">
+      </div>
+    </div>
+  </div>
+
+  <div class="mission-card">
+    <div class="mission-header">
+      <div class="mission-num">4</div>
+      <div class="mission-q">นักเรียนสามารถนำความรู้ทางเศรษฐศาสตร์มาใช้ในชีวิตประจำวันได้อย่างไรบ้าง ให้ยกตัวอย่าง</div>
+    </div>
+    <div class="mission-body">
+      <div class="example-box">
+        <div class="example-box-title">🌟 ตัวอย่างของฉัน</div>
+        <div class="example-row">
+          <span class="example-label">ตัวอย่างการนำไปใช้</span>
+          <input class="example-input trackable" type="text" placeholder="เช่น การออมเงินค่าขนม">
+        </div>
+        <div class="example-row">
+          <span class="example-label">วิธีการ</span>
+          <input class="example-input trackable" type="text" placeholder="ทำอย่างไร...">
+        </div>
+        <div class="example-row">
+          <span class="example-label">เป้าหมาย</span>
+          <input class="example-input trackable" type="text" placeholder="เพื่ออะไร...">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ตอนที่ 2 -->
+  <div class="part2-header">
+    <div class="part2-icon">🎯</div>
+    <div class="part2-text">
+      <strong>ตอนที่ 2 · ภารกิจวิเคราะห์สถานการณ์</strong>
+      อ่านสถานการณ์แล้วเสนอแนวทางการนำความรู้วิชาเศรษฐศาสตร์มาเลือกใช้ให้เหมาะสม
+    </div>
+  </div>
+
+  <div class="scenario-card">
+    <div class="scenario-banner">
+      <div class="scenario-num s1">1</div>
+      <div>ครอบครัวของน้อยหน่ามีรายได้จากการประกอบอาชีพของพ่อ 30,000 บาท/เดือน และรายได้จากการขายของออนไลน์ของแม่</div>
+    </div>
+    <div class="checkbox-group">
+      <div class="checkbox-item"><input type="checkbox" id="s1c1" class="trackable"><label for="s1c1" class="checkbox-label">👤 บุคคล/ครัวเรือน</label><input class="fill-input trackable" type="text" placeholder="เพราะ..."></div>
+      <div class="checkbox-item"><input type="checkbox" id="s1c2" class="trackable"><label for="s1c2" class="checkbox-label">🏭 ผู้ผลิต/ผู้ประกอบการ</label><input class="fill-input trackable" type="text" placeholder="เพราะ..."></div>
+      <div class="checkbox-item"><input type="checkbox" id="s1c3" class="trackable"><label for="s1c3" class="checkbox-label">🏛️ รัฐบาล/ประเทศ</label><input class="fill-input trackable" type="text" placeholder="เพราะ..."></div>
+    </div>
+  </div>
+
+  <div class="scenario-card">
+    <div class="scenario-banner">
+      <div class="scenario-num s2">2</div>
+      <div>เจาะนโยบาย "Solf Power" เพิ่มรายได้ นักวิชาการแนะนำ อาหารไทย-ภาษาไทยในตลาดโลก</div>
+    </div>
+    <div class="checkbox-group">
+      <div class="checkbox-item"><input type="checkbox" id="s2c1" class="trackable"><label for="s2c1" class="checkbox-label">👤 บุคคล/ครัวเรือน</label><input class="fill-input trackable" type="text" placeholder="เพราะ..."></div>
+      <div class="checkbox-item"><input type="checkbox" id="s2c2" class="trackable"><label for="s2c2" class="checkbox-label">🏭 ผู้ผลิต/ผู้ประกอบการ</label><input class="fill-input trackable" type="text" placeholder="เพราะ..."></div>
+      <div class="checkbox-item"><input type="checkbox" id="s2c3" class="trackable"><label for="s2c3" class="checkbox-label">🏛️ รัฐบาล/ประเทศ</label><input class="fill-input trackable" type="text" placeholder="เพราะ..."></div>
+    </div>
+  </div>
+
+  <div class="scenario-card">
+    <div class="scenario-banner">
+      <div class="scenario-num s3">3</div>
+      <div>สินค้าเกษตรซม พิษ "เอลนีโญ" คาดผลผลิตลด ส่งออกดิ่ง จับตากระทบขนส่งน้ำ</div>
+    </div>
+    <div class="checkbox-group">
+      <div class="checkbox-item"><input type="checkbox" id="s3c1" class="trackable"><label for="s3c1" class="checkbox-label">👤 บุคคล/ครัวเรือน</label><input class="fill-input trackable" type="text" placeholder="เพราะ..."></div>
+      <div class="checkbox-item"><input type="checkbox" id="s3c2" class="trackable"><label for="s3c2" class="checkbox-label">🏭 ผู้ผลิต/ผู้ประกอบการ</label><input class="fill-input trackable" type="text" placeholder="เพราะ..."></div>
+      <div class="checkbox-item"><input type="checkbox" id="s3c3" class="trackable"><label for="s3c3" class="checkbox-label">🏛️ รัฐบาล/ประเทศ</label><input class="fill-input trackable" type="text" placeholder="เพราะ..."></div>
+    </div>
+  </div>
+
+  <div class="scenario-card">
+    <div class="scenario-banner">
+      <div class="scenario-num s4">4</div>
+      <div>พิษเศรษฐกิจป่วน ผลสำรวจพบคนไทยมีหนี้เพิ่มสูงสุดในรอบ 15 ปี</div>
+    </div>
+    <div class="checkbox-group">
+      <div class="checkbox-item"><input type="checkbox" id="s4c1" class="trackable"><label for="s4c1" class="checkbox-label">👤 บุคคล/ครัวเรือน</label><input class="fill-input trackable" type="text" placeholder="เพราะ..."></div>
+      <div class="checkbox-item"><input type="checkbox" id="s4c2" class="trackable"><label for="s4c2" class="checkbox-label">🏭 ผู้ผลิต/ผู้ประกอบการ</label><input class="fill-input trackable" type="text" placeholder="เพราะ..."></div>
+      <div class="checkbox-item"><input type="checkbox" id="s4c3" class="trackable"><label for="s4c3" class="checkbox-label">🏛️ รัฐบาล/ประเทศ</label><input class="fill-input trackable" type="text" placeholder="เพราะ..."></div>
+    </div>
+  </div>
+
+  <div class="submit-area">
+    <div class="btn-row">
+      <button class="submit-btn" onclick="submitWork()">🚀 ส่งใบงาน</button>
+      <button class="pdf-btn" id="pdfBtn" onclick="printPDF()">📄 บันทึก PDF</button>
+    </div>
+    <div class="score-display" id="scoreBox">
+      <div class="star-row" id="stars"></div>
+      <div class="score-num" id="scoreNum"></div>
+      <div class="score-label" id="scoreLabel"></div>
+      <div class="pdf-hint" id="pdfHint"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const trackables = document.querySelectorAll('.trackable');
+  const total = trackables.length;
+
+  function updateProgress() {
+    let filled = 0;
+    trackables.forEach(el => {
+      if (el.type === 'checkbox') { if (el.checked) filled++; }
+      else if (el.value.trim().length > 1) filled++;
+    });
+    const pct = Math.round((filled / total) * 100);
+    document.getElementById('prog').style.width = pct + '%';
+    document.getElementById('prog-pct').textContent = pct + '%';
+  }
+
+  trackables.forEach(el => {
+    el.addEventListener('input', updateProgress);
+    el.addEventListener('change', updateProgress);
+  });
+
+  function submitWork() {
+    const name = document.getElementById('stu-name').value.trim();
+    const cls = document.getElementById('stu-class').value.trim();
+    const num = document.getElementById('stu-num').value.trim();
+    if (!name || !cls || !num) {
+      alert('กรุณากรอกข้อมูลนักเรียนให้ครบก่อนส่งใบงาน 📝');
+      document.getElementById('stu-name').focus();
+      return;
+    }
+    let filled = 0;
+    trackables.forEach(el => {
+      if (el.type === 'checkbox') { if (el.checked) filled++; }
+      else if (el.value.trim().length > 1) filled++;
+    });
+    const pct = Math.round((filled / total) * 100);
+    const scoreBox = document.getElementById('scoreBox');
+    scoreBox.style.display = 'block';
+    document.getElementById('scoreNum').textContent = pct + '% เสร็จสมบูรณ์';
+    const stars = pct >= 80 ? '⭐⭐⭐' : pct >= 50 ? '⭐⭐' : '⭐';
+    document.getElementById('stars').textContent = stars;
+    document.getElementById('scoreLabel').textContent = 'ส่งใบงานเรียบร้อยแล้ว คุณ' + name + ' ชั้น ' + cls + ' เลขที่ ' + num + ' 🎉';
+    document.getElementById('pdfHint').textContent = '👇 กด "บันทึก PDF" แล้วส่งไฟล์ PDF ให้คุณครูทาง Line ได้เลยค่ะ';
+    document.getElementById('pdfBtn').style.display = 'inline-block';
+    scoreBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function printPDF() {
+    const name = document.getElementById('stu-name').value.trim();
+    const cls = document.getElementById('stu-class').value.trim();
+    const num = document.getElementById('stu-num').value.trim();
+    document.title = 'ใบงาน1.1_' + name + '_ชั้น' + cls + '_เลขที่' + num;
+    window.print();
+  }
+
+  updateProgress();
+</script>
+</body>
+</html>
